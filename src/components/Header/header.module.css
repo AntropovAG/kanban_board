@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    width: 100vw;
+    height: 55px;
+    background-color: rgb(0, 103, 163);
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.title {
+    color: #fff;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 33px;
+    letter-spacing: 0%;
+}

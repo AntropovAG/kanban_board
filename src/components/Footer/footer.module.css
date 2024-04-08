@@ -1,0 +1,27 @@
+.container {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    min-height: 55px;
+    width: 100%;
+    padding: 0 20px;
+    justify-content: space-between;
+    box-sizing: border-box;
+    align-items: center;
+    background-color: rgb(0, 103, 163);
+    gap: 10px;
+}
+
+.tasksInfo {
+    display: flex;
+    gap: 35px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+}
+
+.authorInfo {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 21px;
+}
