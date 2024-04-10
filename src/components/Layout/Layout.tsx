@@ -1,24 +1,28 @@
 import React from 'react';
+import { useState } from 'react';
 import styles from './layout.module.css';
-import List from '../Backlog/List.tsx';
-import { Data } from '../../utils/interfaces';
+import List from '../List/List.tsx';
+import { Task } from '../../utils/interfaces';
 
 interface LayoutProps {
-  data: Data;
+  backlog: Task[];
+  ready: Task[];
+  inProgress: Task[];
+  finished: Task[];
+  handleBacklogUpdate: (updatedBacklog: Task[]) => void;
+  handleReadyUpdate: (updatedReady: Task[]) => void;
+  handleInProgressUpdate: (updatedInProgress: Task[]) => void;
 }
 
-const Layout: React.FC<LayoutProps> = ({data}) => {
-  const backlog = data.backlog;
-  const ready = data.ready;
-  const inProgress = data.inProgress;
-  const finished = data.finished;
+const Layout: React.FC<LayoutProps> = ({backlog, ready, inProgress, finished, handleBacklogUpdate, handleReadyUpdate, handleInProgressUpdate}) => {
+
 
   return (
     <main className={styles.container}>
-      <List title="Backlog" data={backlog} />
-      <List title="Ready" data={ready}/>
-      <List title="In Progress" data={inProgress}/>
-      <List title="Finished" data={finished}/>
+      <List title="Backlog" displayData={backlog} updateData={handleBacklogUpdate}/>
+      <List title="Ready" displayData={ready} selectData={backlog} updateData={handleBacklogUpdate}/>
+      <List title="In Progress" displayData={inProgress} selectData={ready} updateData={handleReadyUpdate}/>
+      <List title="Finished" displayData={finished} selectData={inProgress} updateData={handleInProgressUpdate}/>
     </main>
   )
 }

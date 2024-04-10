@@ -1,12 +1,20 @@
 import React from 'react'
 import styles from './footer.module.css'
+import { Data } from '../../utils/interfaces'
 
-export default function Footer() {
+interface FooterProps {
+  data: Data;
+}
+
+const Footer: React.FC<FooterProps> = ({data}) => {
+  const activeTasks = data.backlog.length + data.ready.length + data.inProgress.length;
+  const finishedTasks = data.finished.length;
+
   return (
     <footer className={styles.container}>
       <div className={styles.tasksInfo}>
-        <p>Active tasks: {0}</p>
-        <p>Finished tasks: {0}</p>
+        <p>Active tasks: {activeTasks}</p>
+        <p>Finished tasks: {finishedTasks}</p>
       </div>
       <p className={styles.authorInfo}>
         Kanban board by Antropov Anton, 2024
@@ -14,3 +22,5 @@ export default function Footer() {
     </footer>
   )
 }
+
+export default Footer;
