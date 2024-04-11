@@ -13,7 +13,8 @@ const TaskInfo: React.FC<Props> = ({ data, updateTaskDescription }) => {
   const [editOpen, setEditOpen] = useState<boolean>(false);
   const [description, setDescription] = useState<string | undefined>('');
   const { id } = useParams<{ id: string }>();
-  const task = data.backlog.find(task => task.id.toString() === id) || data.ready.find(task => task.id.toString() === id) || data.inProgress.find(task => task.id.toString() === id) || data.finished.find(task => task.id.toString() === id);
+  const allTasks = [...data.backlog, ...data.ready, ...data.inProgress, ...data.finished];
+  const task = allTasks.find(task => task.id.toString() === id);
 
   const onTextClick = () => {
     setEditOpen(prevEditOpen => !prevEditOpen);

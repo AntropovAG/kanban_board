@@ -1,7 +1,7 @@
 .wrapper {
     display: flex;
     width: 95%;
-    height: calc(100% - 164px);
+    height: calc(100vh - 164px);
     margin: 22px auto;
     background-color: #fff;
     border-radius: 5px;
