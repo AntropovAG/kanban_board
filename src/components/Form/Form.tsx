@@ -11,18 +11,18 @@ interface Props {
 
 const Form: React.FC<Props> = ({ title, data, selectData, handleClick }) => {
     const [task, setTask] = useState('');
+    const [open, setOpen] = useState(false);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setTask(e.target.value);
     };
 
-    const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedTitle = e.target.value;
-        const selectedTask = selectData?.find(task => task.title === selectedTitle);
+    const selectTask = (id: number) => {
+        const selectedTask = selectData?.find(task => task.id === id);
         if (selectedTask) {
             data.push(selectedTask);
         }
-        const updatedSelectData = selectData?.filter(task => task.title !== selectedTitle);
+        const updatedSelectData = selectData?.filter(task => task.id !== id);
         handleClick(updatedSelectData);
     }
 
@@ -40,6 +40,10 @@ const Form: React.FC<Props> = ({ title, data, selectData, handleClick }) => {
         setTask('');
     };
 
+    const onButtonClick = () => {
+        setOpen(prevOpen => !prevOpen);
+    }
+
     return (
         <form className={styles.form} onSubmit={addTask}>
             {
@@ -49,13 +53,14 @@ const Form: React.FC<Props> = ({ title, data, selectData, handleClick }) => {
                         <button className={styles.button}>Submit</button>
                     </>) : (
                     <div className={styles.selectContainer}>
-                        <select className={styles.select} name="tasks" id="tasks" onChange={handleSelect} defaultValue="">
-                            <option className={styles.option} value="" disabled hidden>Select a task</option>
+                        <div className={styles.selectButton} onClick={onButtonClick}></div>
+                        {open && <div className={styles.selectContent}>
                             {selectData?.map((task, index) => (
-                                <option className={styles.option} key={index} value={task.title}>{task.title}</option>
+                                <div key={index} onClick={() => selectTask(task.id)}>{task.title}</div>
                             ))}
-                        </select>
-                    </div>)
+                        </div>}
+                    </div>
+                )
             }
         </form>
     );

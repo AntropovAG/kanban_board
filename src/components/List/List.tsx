@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './list.module.css';
 import Form from '../Form/Form.tsx';
 import { Task } from '../../utils/interfaces.ts';
+import { Link } from 'react-router-dom';
 
 interface Props {
     title: string;
@@ -14,7 +15,7 @@ const List: React.FC<Props> = ({title, displayData, selectData, updateData}) => 
     const [formOpen, setFormOpen] = useState(false);
 
     const toggleForm = () => {
-        setFormOpen(!formOpen);
+        setFormOpen(prevFormOpen => !prevFormOpen);
     }
 
     const handleClick = (updatedDisplayData?: Task[]) => {
@@ -29,18 +30,13 @@ const List: React.FC<Props> = ({title, displayData, selectData, updateData}) => 
             return true;
     }
 
-    const handleItemClick = (task) => {
-        console.log('Item clicked');
-        console.log(task.id);
-    }
-
     return (
         <div className={styles.container}>
             <h2 className={styles.title}>{title}</h2>
             <ul className={styles.list}>
                 {displayData.map((task, index) => (
-                    <li key={index} className={styles.listItem} onClick={()=>handleItemClick(task)}>
-                        {task.title}
+                    <li key={index} className={styles.listItem}>
+                    <Link to={`/task/${task.id}`} className={styles.link}>{task.title}</Link>    
                     </li>
                 ))}
             </ul>
