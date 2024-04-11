@@ -42,6 +42,38 @@ function App(): JSX.Element {
     setInProgress(updatedInProgress);
   };
 
+  const updateTaskDescription = (id: number, description: string) => {
+    const updatedBacklog = backlog.map(task => {
+      if (task.id === id) {
+        return { ...task, description: description };
+      }
+      return task;
+    });
+    const updatedReady = ready.map(task => {
+      if (task.id === id) {
+        return { ...task, description: description };
+      }
+      return task;
+    });
+    const updatedInProgress = inProgress.map(task => {
+      if (task.id === id) {
+        return { ...task, description: description };
+      }
+      return task;
+    });
+    const updatedFinished = finished.map(task => {
+      if (task.id === id) {
+        return { ...task, description: description };
+      }
+      return task;
+    });
+  
+    setBacklog(updatedBacklog);
+    setReady(updatedReady);
+    setInProgress(updatedInProgress);
+    setFinished(updatedFinished);
+  };
+
   return (
     <div className={styles.container}>
       <Header />
@@ -59,8 +91,9 @@ function App(): JSX.Element {
         backlog: backlog,
         ready: ready,
         inProgress: inProgress,
-        finished: finished
-      }} />} />
+        finished: finished,
+      }}
+      updateTaskDescription={updateTaskDescription} />} />
       </Routes>
       <Footer data={{
         backlog: backlog,
