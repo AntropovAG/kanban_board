@@ -13,8 +13,8 @@ const Footer: React.FC<FooterProps> = ({data}) => {
   return (
     <footer className={styles.container}>
       <div className={styles.tasksInfo}>
-        <p>Active tasks: {activeTasks}</p>
-        <p>Finished tasks: {finishedTasks}</p>
+        <p>Active tasks: {activeTasks ? activeTasks : 0}</p>
+        <p>Finished tasks: {finishedTasks ? finishedTasks : 0}</p>
       </div>
       <p className={styles.authorInfo}>
         Kanban board by Antropov Anton, 2024

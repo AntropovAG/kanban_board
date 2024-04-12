@@ -34,11 +34,12 @@ const List: React.FC<Props> = ({title, displayData, selectData, updateData}) => 
         <div className={styles.container}>
             <h2 className={styles.title}>{title}</h2>
             <ul className={styles.list}>
-                {displayData.map((task, index) => (
+                {displayData ? displayData.map((task, index) => (
                     <li key={index} className={styles.listItem}>
                     <Link to={`/task/${task.id}`} className={styles.link}>{task.title}</Link>    
                     </li>
-                ))}
+                )) : null
+                }
             </ul>
             {formOpen && <Form title={title} data={displayData} selectData={selectData} handleClick={handleClick} />}
             {!formOpen && <button className={styles.button} onClick={toggleForm} disabled={!isValid()}>

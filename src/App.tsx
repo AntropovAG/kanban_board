@@ -16,7 +16,8 @@ function App(): JSX.Element {
   const [finished, setFinished] = useState<Task[]>([]);
 
   useEffect(() => {
-    const data: Data = JSON.parse(localStorage.getItem("data") || "{}");
+    const defauldData = '{"backlog": [], "ready": [], "inProgress": [], "finished": []}';
+    const data: Data = JSON.parse(localStorage.getItem("data") || defauldData);
     if (data) {
       setBacklog(data.backlog);
       setReady(data.ready);
